@@ -1,0 +1,49 @@
+.tree {
+  padding: 10px 2px 0 7px;
+  margin: 0;
+  list-style-type: none;
+  font-weight: 500;
+  height: 90%;
+  overflow: auto;
+  border-right: 2px solid #337ab7;
+
+  .subtree {
+    list-style-type: none;
+    padding-left: 16px;
+  }
+
+  .selected {
+    > .tree-node {
+      .tree-node-name {
+        background-color: #c8daf4;
+      }
+    }
+  }
+
+  ul {
+    display: none;
+  }
+
+  li {
+    margin-top: 2px;
+    &.expanded {
+      > .tree-node {
+        .folder-collapse {
+          display: block;
+        }
+      }
+
+      > ul {
+        display: block;
+      }
+    }
+
+    &.collapsed {
+      > .tree-node {
+        .folder-expand {
+          display: block;
+        }
+      }
+    }
+  }
+}
