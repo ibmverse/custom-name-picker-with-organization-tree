@@ -1,4 +1,4 @@
-# my-name-picker-sample
+# custom-name-picker-sample
 
 To Run this sample
 
