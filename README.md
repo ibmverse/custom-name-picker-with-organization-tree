@@ -1,1 +1,1 @@
-# custom-name-picker-with-organization-tree
+# custom-name-picker-sample
