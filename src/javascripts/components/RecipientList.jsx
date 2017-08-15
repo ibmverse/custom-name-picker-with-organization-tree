@@ -36,21 +36,21 @@ class RecipientList extends React.Component {
     return (
       <div className='recipient-list'>
         <div className='recipient-to-container'>
-          <span className='recipient-to-header'>
+          <div className='recipient-to-header'>
             <FormattedMessage id="recipient-to" defaultMessage="To"/>
-          </span>
+          </div>
           {toList}
         </div>
         <div className='recipient-cc-container'>
-          <span className='recipient-cc-header'>
+          <div className='recipient-cc-header'>
             <FormattedMessage id="recipient-cc" defaultMessage="cc"/>
-          </span>
+          </div>
           {ccList}
         </div>
         <div className='recipient-bcc-container'>
-          <span className='recipient-bcc-header'>
+          <div className='recipient-bcc-header'>
             <FormattedMessage id="recipient-bcc" defaultMessage="bcc"/>
-          </span>
+          </div>
           {bccList}
         </div>
       </div>
