@@ -77,6 +77,20 @@ export function addRecipient(members) {
   }
 }
 
+export function addRecipientCc(members) {
+  return {
+    type: actionTypes.ADD_RECIPIENT_CC,
+    members
+  }
+}
+
+export function addRecipientBcc(members) {
+  return {
+    type: actionTypes.ADD_RECIPIENT_BCC,
+    members
+  }
+}
+
 export function removeRecipient(members) {
   return {
     type: actionTypes.REMOVE_RECIPIENT,

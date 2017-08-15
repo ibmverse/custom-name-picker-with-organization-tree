@@ -29,15 +29,17 @@ function sendRecipientsToVerse() {
   }
 
   var state = store.getState();
-  var recipients = _.values(state.recipient);
-  recipients.forEach(user => {
-    var emails_message = {
-      verseApiType: "com.ibm.verse.add.contact",
-      userEmail: user.email,
-      userName: user.name
-    };
-    verse.postMessage(emails_message, verseOrigin);
-  });
+  const adapter = (recipient) => {
+    return {userEmail: recipient.email, userName: recipient.name};
+  };
+
+  var message = {
+    verseApiType: "com.ibm.verse.add.contact",
+    recipientTo: _.values(state.recipient.to).map(adapter),
+    recipientCC: _.values(state.recipient.cc).map(adapter),
+    recipientBcc: _.values(state.recipient.bcc).map(adapter)
+  }
+  verse.postMessage(message, verseOrigin);
 }
 
 const locale = (navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage;
@@ -68,7 +70,6 @@ fetch(`/messages/${languageWithoutRegionCode}.json`).then(res => res.json()).the
 });
 
 var originsList = [
- "https://mail.notes.collabservintegration.com",
  "https://mail.notes.na.collabserv.com",
  "https://mail.notes.ap.collabserv.com",
  "https://mail.notes.ce.collabserv.com"

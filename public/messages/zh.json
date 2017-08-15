@@ -1,7 +1,12 @@
 {
   "addRecipients" : "添加收件人",
+  "addRecipientsCc" : "添加抄送",
+  "addRecipientsBcc" : "添加密送",
   "removeRecipients" : "删除收件人",
   "candidates" : "备选列表",
   "recipients" : "已选列表",
-  "okBtn": "添加到Verse"
+  "okBtn": "添加到Verse",
+  "recipient-to": "发送",
+  "recipient-cc": "抄送",
+  "recipient-bcc": "密送"
 }

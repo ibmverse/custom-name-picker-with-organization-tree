@@ -1,7 +1,12 @@
 {
   "addRecipients" : "Add Recipient",
+  "addRecipientsCc" : "Add cc",
+  "addRecipientsBcc" : "Add bcc",
   "removeRecipients" : "Remove Recipient",
   "candidates" : "Candidates",
   "recipients" : "Recipients",
-  "okBtn": "Add to Verse"
+  "okBtn": "Add to Verse",
+  "recipient-to": "To",
+  "recipient-cc": "cc",
+  "recipient-bcc": "bcc"
 }
