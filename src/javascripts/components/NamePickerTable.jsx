@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import BizcardList from './BizcardList';
 import ActionList from './ActionList';
-import RecipientList from './RecipientList';
 import _ from 'lodash';
 import '../../stylesheets/name-picker-table.less';
 
@@ -60,40 +59,6 @@ import {FormattedMessage, injectIntl, defineMessages} from 'react-intl';
      };
    }
 
-   createAddRecipientCcAction() {
-     const messages = defineMessages({
-       addRecipientsCc: {
-         id: 'addRecipientsCc',
-         defaultMessage: 'Add cc'
-       }
-     });
-     return {
-       id: 'add-recipient-cc',
-       name: this.props.intl.formatMessage(messages.addRecipientsCc),
-       handler: () => {
-         this.props.onCandidatesAddCc(this.state.selectedCandidiates);
-         this.setState({selectedCandidiates: {}});
-       }
-     };
-   }
-
-   createAddRecipientBccAction() {
-     const messages = defineMessages({
-       addRecipientsBcc: {
-         id: 'addRecipientsBcc',
-         defaultMessage: 'Add bcc'
-       }
-     });
-     return {
-       id: 'add-recipient-bcc',
-       name: this.props.intl.formatMessage(messages.addRecipientsBcc),
-       handler: () => {
-         this.props.onCandidatesAddBcc(this.state.selectedCandidiates);
-         this.setState({selectedCandidiates: {}});
-       }
-     };
-   }
-
    createRemoveRecipientToAction() {
      const messages = defineMessages({
        removeRecipients: {
@@ -118,24 +83,8 @@ import {FormattedMessage, injectIntl, defineMessages} from 'react-intl';
      };
    }
 
-   createAddRecipientActionsGroup() {
-     return {
-       id: 'add',
-       actions: [this.createAddRecipientToAction(),
-         this.createAddRecipientCcAction(),
-         this.createAddRecipientBccAction()]
-     }
-   }
-
-   createRemoveRecipientActionsGroup() {
-     return {
-       id: 'remove',
-       actions: [this.createRemoveRecipientToAction()]
-     }
-   }
-
    createActonList() {
-     return [this.createAddRecipientActionsGroup(), this.createRemoveRecipientActionsGroup()];
+     return [this.createRecipientToActionGroup()];
    }
 
    render() {
@@ -160,11 +109,11 @@ import {FormattedMessage, injectIntl, defineMessages} from 'react-intl';
                <ActionList actions={this.createActonList()}></ActionList>
              </td>
              <td className='recipients'>
-               <RecipientList
-                 recipients={this.props.recipients}
-                 selectedRecipients={_.keys(this.state.selectedRecipientsTo)}
-                 onRecipientClick={this.toggleRecipientSelection}
-                 ></RecipientList>
+               <BizcardList
+                 bizcards={this.props.recipients}
+                 selectedBizcards={_.keys(this.state.selectedRecipientsTo)}
+                 onBizcardClick={this.toggleRecipientSelection}
+               ></BizcardList>
              </td>
            </tr>
          </tbody>
@@ -175,11 +124,9 @@ import {FormattedMessage, injectIntl, defineMessages} from 'react-intl';
 
  NamePickerTable.propTypes = {
    candidates: PropTypes.array,
-   recipients: PropTypes.object,
+   recipients: PropTypes.array,
    isCandidatesLoading: PropTypes.bool,
    onCandidatesAddTo: PropTypes.func,
-   onCandidatesAddCc: PropTypes.func,
-   onCandidatesAddBcc: PropTypes.func,
    onToRecipientsRemove: PropTypes.func
  }
 

@@ -52,25 +52,13 @@ export function department(state = {}, action) {
   }
 }
 
-export function recipient(state = {to : {}, cc: {}, bcc: {}}, action) {
+export function recipient(state = {}, action) {
   switch (action.type) {
     case actionTypes.ADD_RECIPIENT:
-      return _.assign({}, state, {to: _.assign(state.to, action.members)});
-    case actionTypes.ADD_RECIPIENT_CC:
-      return _.assign({}, state, {cc: _.assign(state.cc, action.members)});
-    case actionTypes.ADD_RECIPIENT_BCC:
-      return _.assign({}, state, {bcc: _.assign(state.bcc, action.members)});
+      return _.assign({}, state, action.members);
     case actionTypes.REMOVE_RECIPIENT:
-      return removeRecipients(state, action.members);
+      return _.omit(state, _.keys(action.members));
     default:
       return state;
   }
-}
-
-function removeRecipients(recipients, members) {
-  return {
-    to: _.omit(recipients.to, _.keys(members)),
-    cc: _.omit(recipients.cc, _.keys(members)),
-    bcc: _.omit(recipients.bcc, _.keys(members))
-  };
 }
