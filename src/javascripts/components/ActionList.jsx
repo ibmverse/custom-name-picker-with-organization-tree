@@ -13,7 +13,6 @@ import '../../stylesheets/action-list.less'
  *        {
  *          id: 'ok',
  *          name: 'ok',
- *          className: 'className',
  *          handler: okHandler
  *        }
  *      ]
@@ -24,7 +23,6 @@ import '../../stylesheets/action-list.less'
  *        {
  *          id: 'cancel',
  *          name: 'cancel',
- *          className: 'className',
  *          handler: cancelHandler
  *        }
  *      ]
