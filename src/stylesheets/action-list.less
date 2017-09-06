@@ -5,16 +5,37 @@
 
   .action-group {
     display: flex;
-    padding-top: 10px;
+    padding-top: 5px;
     flex-direction: column;
     button {
-      margin-bottom: 10px;
-      border-radius: 4px;
-      background-color: #5cb85c;
-      border-color: #4cae4c;
-      border: 1px;
-      font-weight: 400;
-      color: #fff;
+      color: #4178be;
+      position: relative;
+      padding: 0px 12px;
+      margin: auto 5px 5px 5px;
+      height: 24px;
+      background-color: transparent;
+      border: 1px solid #4178be;
+      line-height: 1.2em;
+      font-weight: bold;
+      font-size: 12px;
+
+      &:hover {
+        cursor: pointer;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 2px;
+          right: 2px;
+          bottom: 2px;
+          left: 2px;
+          border: 1px solid #4178be;
+        }
+      }
+
+      &:focus {
+        outline: none;
+      }
     }
   }
 }

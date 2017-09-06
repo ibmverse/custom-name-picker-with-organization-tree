@@ -8,11 +8,13 @@ import PropTypes from 'prop-types';
  *    {
  *      id: 'ok',
  *      name: 'ok',
+ *      className: 'className',
  *      handler: okHandler
  *    },
  *    {
  *      id: 'cancel',
  *      name: 'cancel',
+ *      className: 'className',
  *      handler: cancelHandler
  *    }
  * ]
@@ -24,11 +26,10 @@ class ActionGroup extends React.Component {
   render() {
     var actions = this.props.actions || [];
     var children = actions.map( action =>
-      <button key={action.id} onClick={action.handler}>
+      <button key={action.id} onClick={action.handler} className={action.className}>
         {action.name}
       </button>
     );
-
     return (<div className='action-group'>{children}</div>);
   }
 }
