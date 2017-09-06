@@ -1,6 +1,8 @@
+@import 'shared-values.less';
+
 .name-picker-table {
   border-spacing: 0;
-  height: calc(~'100% - 34px');
+  height: calc(~'100% - @{button-height} - (@{name-picker-actions-ver-margin} * 2)');
   border-bottom: 1px solid #e0e0e0;
 
   .candidates {

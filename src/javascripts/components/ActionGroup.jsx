@@ -28,6 +28,7 @@ class ActionGroup extends React.Component {
         {action.name}
       </button>
     );
+
     return (<div className='action-group'>{children}</div>);
   }
 }
