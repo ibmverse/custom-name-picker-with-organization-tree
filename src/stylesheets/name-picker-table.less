@@ -1,6 +1,9 @@
+@import 'shared-values.less';
+
 .name-picker-table {
-  border: 1px #dddddd solid;
-  height: 90%;
+  border-spacing: 0;
+  height: calc(~'100% - @{button-height} - (@{name-picker-actions-ver-margin} * 2)');
+  border-bottom: 1px solid #e0e0e0;
 
   .candidates {
     width: 40%;
@@ -12,19 +15,29 @@
     width: 20%;
   }
 
-  th {
-    height: 30px;
-    color: #0066c0;
-    border: 1px #dddddd solid;
-  }
+  tr {
+    th:not(:last-child), td:not(:last-child) {
+      border-right: 1px solid #e0e0e0;
+    }
 
-  td {
-    vertical-align: top;
-    border: 1px #dddddd solid;
-    ul {
-      height: 100%;
-      overflow-y: auto;
-      margin:0;
+    &:not(:last-child) {
+      th, td {
+        border-bottom: 1px solid #e0e0e0;
+      }
+    }
+
+    th {
+      height: 30px;
+      color: #0066c0;
+    }
+
+    td {
+      vertical-align: top;
+      ul {
+        height: 100%;
+        overflow-y: auto;
+        margin:0;
+      }
     }
   }
 
