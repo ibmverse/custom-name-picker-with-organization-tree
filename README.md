@@ -16,13 +16,11 @@ This is a [Nodejs](https://nodejs.org/en/) project. Please make sure that you ha
 1. Clone this repository
 1. Run `npm i` in the root folder of the cloned project
 1. Run `npm run server` to start the server
-1. Open http://127.0.0.1:8080 in your browser, you should see the sample custom name picker with organization tree UI
-1. Use the `applications.json` under the root folder of the cloned project to register Verse applications. You have several options to register applications into Verse.
-    1. If you want to try this sample on your personal client, you can locally register applications through IBM Verse Developer Browser Extension. The tutorial is [here](https://ibmverse.github.io/verse-developer/developers/#get-started). It works with both VoC and VoP.
-    1. If you want to register applications for your organization, you need to register it on server. To do that, ways are different for VoC and VoP.
-        - For VoC, you can register it with use of IBM App Registry. Please take the section *"Deploy application on Verse on-Cloud"* of [Registering an Application in IBM Verse](https://ibmverse.github.io/verse-developer/developers/#registering-an-application-in-ibm-verse) as a reference.
-        - For VoP, you can register it through VoP Extensibility. Please take the section *"Deploy application on Verse on-Premise"* of [Registering an Application in IBM Verse](https://ibmverse.github.io/verse-developer/developers/#registering-an-application-in-ibm-verse) as a reference.
-1. Check the `originsList` variable in `src/javascripts/index.jsx`, please add your Verse server hostname in it.
+1. Open https://127.0.0.1:8080 in your browser, you should see the sample custom name picker with organization tree UI
+1. Use the applications.json under the root folder of the cloned project to register Verse applications. You have several options to register applications into Verse.
+    1. If you want to try this sample on your personal client, you can locally register applications through IBM Verse Developer Browser Extension. The tutorial is [here](https://ibmverse.github.io/verse-developer/developers/#get-started).
+    1. If you want to register applications for your organization, you need to register it on server. For VoC, you can register it with use of IBM App Registry. Please take the section *"Deploy application on Verse on-Cloud"* of [Registering an Application in IBM Verse](https://ibmverse.github.io/verse-developer/developers/#registering-an-application-in-ibm-verse) as a reference.
+1. Check the `originsList` variable in `src/javascripts/index.jsx`, please add your VOP server hostname in it.
 1. Login Verse with web browser and make sure you have enabled feature `custom-name-picker`
 1. It should be good to try in Verse now !
 

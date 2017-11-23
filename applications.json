@@ -7,7 +7,7 @@
     "type": "com.ibm.verse.ext.namePicker",
     "name": "Custom name picker with organization tree extension",
     "payload": {
-      "url": "http://127.0.0.1:8080/"
+      "url": "https://127.0.0.1:8080/"
     }
   }],
   "services": [
