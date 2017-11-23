@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import _ from 'lodash';
 import NamePickerTable from '../components/NamePickerTable';
-import {addRecipient, removeRecipient} from '../actions/actions';
+import {addRecipientTo, addRecipientCc, addRecipientBcc, removeRecipient} from '../actions/actions';
 
 function getCandidatesFromState(state) {
   var selectedDepartmentId = state.department.selected;
@@ -14,7 +14,7 @@ function getCandidatesFromState(state) {
 }
 
 function getRecipientsFromState(state) {
-  return _.values(state.recipient);
+  return state.recipient;
 }
 
 function isCandidatesLoading(state) {
@@ -38,10 +38,17 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onCandidatesAddTo: (candidates) => {
-      dispatch(addRecipient(candidates));
+      dispatch(addRecipientTo(candidates));
     },
-    onToRecipientsRemove: (recipients) => {
-      dispatch(removeRecipient(recipients));
+    onCandidatesAddCc: (candidates) => {
+    dispatch(addRecipientCc(candidates));
+  },
+  onCandidatesAddBcc: (candidates) => {
+    dispatch(addRecipientBcc(candidates));
+  },
+
+    onToRecipientsRemove: (recipientsTo, recipientsCc, recipientsBcc) => {
+      dispatch(removeRecipient(recipientsTo, recipientsCc, recipientsBcc));
     }
   }
 }

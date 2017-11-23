@@ -70,16 +70,32 @@ function getMembersFromResponse(response) {
   return response;
 }
 
-export function addRecipient(members) {
+export function addRecipientTo(members) {
   return {
-    type: actionTypes.ADD_RECIPIENT,
+    type: actionTypes.ADD_RECIPIENT_TO,
     members
   }
 }
 
-export function removeRecipient(members) {
+export function addRecipientCc(members) {
+  return {
+    type: actionTypes.ADD_RECIPIENT_CC,
+    members
+  }
+}
+
+export function addRecipientBcc(members) {
+  return {
+    type: actionTypes.ADD_RECIPIENT_BCC,
+    members
+  }
+}
+
+export function removeRecipient(membersTo, membersCc, membersBcc) {
   return {
     type: actionTypes.REMOVE_RECIPIENT,
-    members
+    membersTo,
+    membersCc,
+    membersBcc
   }
 }

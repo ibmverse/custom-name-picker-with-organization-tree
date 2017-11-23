@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import BizcardList from './BizcardList';
 import ActionList from './ActionList';
+import RecipientList from './RecipientList';
 import _ from 'lodash';
 import '../../stylesheets/name-picker-table.less';
 
@@ -20,7 +21,9 @@ import {FormattedMessage, injectIntl, defineMessages} from 'react-intl';
      super(props);
      this.state = {
        selectedCandidiates: {},
-       selectedRecipientsTo: {}
+       selectedRecipientsTo: {},
+       selectedRecipientsCc: {},
+       selectedRecipientsBcc: {}
      };
      this.toggleCandidateSelection = this.toggleCandidateSelection.bind(this);
      this.toggleRecipientSelection = this.toggleRecipientSelection.bind(this);
@@ -34,19 +37,33 @@ import {FormattedMessage, injectIntl, defineMessages} from 'react-intl';
      }
    }
 
-   toggleRecipientSelection(bizcard) {
-     if(this.state.selectedRecipientsTo[bizcard.email]) {
-       this.setState({selectedRecipientsTo: _.omit(this.state.selectedRecipientsTo, bizcard.email)});
-     } else {
-       this.setState({selectedRecipientsTo: _.assign({}, this.state.selectedRecipientsTo, {[bizcard.email]: bizcard})});
+   toggleRecipientSelection(type, bizcard) {
+     if (type && bizcard) {
+       type = type.toLowerCase();
+       let recipientType = type === 'to' ? 'selectedRecipientsTo' :
+         type === 'cc' ? 'selectedRecipientsCc' :
+         type === 'bcc' ? 'selectedRecipientsBcc' :
+         null;
+       if (recipientType) {
+         let email = bizcard.email;
+         if (this.state[recipientType][email]) {
+           this.setState({
+             [recipientType]: _.omit(this.state[recipientType], [email])
+           });
+         } else {
+           this.setState({
+             [recipientType]: _.assign({}, this.state[recipientType], {[email]: bizcard})
+           });
+         }
+       }
      }
    }
 
    createAddRecipientToAction() {
      const messages = defineMessages({
        addRecipients: {
-         id: 'addRecipients',
-         defaultMessage: 'Add Recipient'
+         id: 'addRecipientsTo',
+         defaultMessage: 'Add to'
        }
      });
      return {
@@ -54,6 +71,40 @@ import {FormattedMessage, injectIntl, defineMessages} from 'react-intl';
        name: this.props.intl.formatMessage(messages.addRecipients),
        handler: () => {
          this.props.onCandidatesAddTo(this.state.selectedCandidiates);
+         this.setState({selectedCandidiates: {}});
+       }
+     };
+   }
+
+   createAddRecipientCcAction() {
+     const messages = defineMessages({
+       addRecipientsCc: {
+         id: 'addRecipientsCc',
+         defaultMessage: 'Add cc'
+       }
+     });
+     return {
+       id: 'add-recipient-cc',
+       name: this.props.intl.formatMessage(messages.addRecipientsCc),
+       handler: () => {
+         this.props.onCandidatesAddCc(this.state.selectedCandidiates);
+         this.setState({selectedCandidiates: {}});
+       }
+     };
+   }
+
+   createAddRecipientBccAction() {
+     const messages = defineMessages({
+       addRecipientsBcc: {
+         id: 'addRecipientsBcc',
+         defaultMessage: 'Add bcc'
+       }
+     });
+     return {
+       id: 'add-recipient-bcc',
+       name: this.props.intl.formatMessage(messages.addRecipientsBcc),
+       handler: () => {
+         this.props.onCandidatesAddBcc(this.state.selectedCandidiates);
          this.setState({selectedCandidiates: {}});
        }
      };
@@ -70,21 +121,40 @@ import {FormattedMessage, injectIntl, defineMessages} from 'react-intl';
        id: 'remove-recipient-to',
        name: this.props.intl.formatMessage(messages.removeRecipients),
        handler: () => {
-         this.props.onToRecipientsRemove(this.state.selectedRecipientsTo);
-         this.setState({selectedRecipientsTo: {}});
+         this.props.onToRecipientsRemove(
+           this.state.selectedRecipientsTo,
+           this.state.selectedRecipientsCc,
+           this.state.selectedRecipientsBcc
+         );
+         this.setState({
+           selectedRecipientsTo: {},
+           selectedRecipientsCc: {},
+           selectedRecipientsBcc: {}
+         });
        }
      }
    }
 
-   createRecipientToActionGroup() {
+   createAddRecipientActionsGroup() {
      return {
-       id: 'to',
-       actions: [this.createAddRecipientToAction(), this.createRemoveRecipientToAction()]
-     };
+       id: 'add',
+       actions: [
+         this.createAddRecipientToAction(),
+         this.createAddRecipientCcAction(),
+         this.createAddRecipientBccAction()
+       ]
+     }
+   }
+
+   createRemoveRecipientActionsGroup() {
+     return {
+       id: 'remove',
+       actions: [this.createRemoveRecipientToAction()]
+     }
    }
 
    createActonList() {
-     return [this.createRecipientToActionGroup()];
+     return [this.createAddRecipientActionsGroup(), this.createRemoveRecipientActionsGroup()];
    }
 
    render() {
@@ -109,11 +179,13 @@ import {FormattedMessage, injectIntl, defineMessages} from 'react-intl';
                <ActionList actions={this.createActonList()}></ActionList>
              </td>
              <td className='recipients'>
-               <BizcardList
-                 bizcards={this.props.recipients}
-                 selectedBizcards={_.keys(this.state.selectedRecipientsTo)}
-                 onBizcardClick={this.toggleRecipientSelection}
-               ></BizcardList>
+             <RecipientList
+              recipients={this.props.recipients}
+              selectedRecipientsTo={_.keys(this.state.selectedRecipientsTo)}
+              selectedRecipientsCc={_.keys(this.state.selectedRecipientsCc)}
+              selectedRecipientsBcc={_.keys(this.state.selectedRecipientsBcc)}
+              onRecipientClick={this.toggleRecipientSelection}
+              ></RecipientList>
              </td>
            </tr>
          </tbody>
@@ -124,9 +196,11 @@ import {FormattedMessage, injectIntl, defineMessages} from 'react-intl';
 
  NamePickerTable.propTypes = {
    candidates: PropTypes.array,
-   recipients: PropTypes.array,
+   recipients: PropTypes.object,
    isCandidatesLoading: PropTypes.bool,
    onCandidatesAddTo: PropTypes.func,
+   onCandidatesAddCc: PropTypes.func,
+   onCandidatesAddBcc: PropTypes.func,
    onToRecipientsRemove: PropTypes.func
  }
 
