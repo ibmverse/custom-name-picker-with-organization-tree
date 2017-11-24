@@ -63,7 +63,7 @@ import {FormattedMessage, injectIntl, defineMessages} from 'react-intl';
      const messages = defineMessages({
        addRecipients: {
          id: 'addRecipientsTo',
-         defaultMessage: 'Add to'
+         defaultMessage: 'Add To'
        }
      });
      return {
@@ -80,7 +80,7 @@ import {FormattedMessage, injectIntl, defineMessages} from 'react-intl';
      const messages = defineMessages({
        addRecipientsCc: {
          id: 'addRecipientsCc',
-         defaultMessage: 'Add cc'
+         defaultMessage: 'Add Cc'
        }
      });
      return {
@@ -97,7 +97,7 @@ import {FormattedMessage, injectIntl, defineMessages} from 'react-intl';
      const messages = defineMessages({
        addRecipientsBcc: {
          id: 'addRecipientsBcc',
-         defaultMessage: 'Add bcc'
+         defaultMessage: 'Add Bcc'
        }
      });
      return {
