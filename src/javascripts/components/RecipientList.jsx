@@ -20,36 +20,36 @@ class RecipientList extends React.Component {
 
     var toList = <BizcardList
                     bizcards={toRecipients}
-                    selectedBizcards={this.props.selectedRecipients}
-                    onBizcardClick={this.props.onRecipientClick}
+                    selectedBizcards={this.props.selectedRecipientsTo}
+                    onBizcardClick={_.curry(this.props.onRecipientClick)('to')}
                  ></BizcardList>;
     var ccList = <BizcardList
                     bizcards={ccRecipients}
-                    selectedBizcards={this.props.selectedRecipients}
-                    onBizcardClick={this.props.onRecipientClick}
+                    selectedBizcards={this.props.selectedRecipientsCc}
+                    onBizcardClick={_.curry(this.props.onRecipientClick)('cc')}
                  ></BizcardList>;
     var bccList = <BizcardList
                     bizcards={bccRecipients}
-                    selectedBizcards={this.props.selectedRecipients}
-                    onBizcardClick={this.props.onRecipientClick}
+                    selectedBizcards={this.props.selectedRecipientsBcc}
+                    onBizcardClick={_.curry(this.props.onRecipientClick)('bcc')}
                  ></BizcardList>;
     return (
       <div className='recipient-list'>
         <div className='recipient-to-container'>
           <div className='recipient-to-header'>
-            <FormattedMessage id="recipient-to" defaultMessage="To"/>
+            <FormattedMessage id="selectedTo" defaultMessage="To"/>
           </div>
           {toList}
         </div>
         <div className='recipient-cc-container'>
           <div className='recipient-cc-header'>
-            <FormattedMessage id="recipient-cc" defaultMessage="cc"/>
+            <FormattedMessage id="selectedCc" defaultMessage="cc"/>
           </div>
           {ccList}
         </div>
         <div className='recipient-bcc-container'>
           <div className='recipient-bcc-header'>
-            <FormattedMessage id="recipient-bcc" defaultMessage="bcc"/>
+            <FormattedMessage id="selectedBcc" defaultMessage="bcc"/>
           </div>
           {bccList}
         </div>
@@ -58,9 +58,15 @@ class RecipientList extends React.Component {
   }
 }
 
+function onRecipientClick(type) {
+  this.props.onRecipientClick(type);
+}
+
 RecipientList.propTypes = {
   recipients: PropTypes.object,
-  selectedRecipients: PropTypes.array,
+  selectedRecipientsTo: PropTypes.array,
+  selectedRecipientsCc: PropTypes.array,
+  selectedRecipientsBcc: PropTypes.array,
   onRecipientClick: PropTypes.func
 }
 

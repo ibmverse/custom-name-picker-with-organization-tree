@@ -17,6 +17,7 @@ app.get('/api/department/:id', (req, res) => {
 app.listen('9090', ()=> {console.log('API server started.')});
 
 const path = require('path');
+const fs = require('fs');
 const Webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const webpackConfig = require('./webpack.config');
@@ -32,6 +33,11 @@ const options = {
   },
   proxy: {
     "/api": "http://localhost:9090"
+  },
+  https: {
+    cert: fs.readFileSync("cert/file.crt"),
+    key: fs.readFileSync("cert/private.pem"),
+    cacert: fs.readFileSync("cert/csr.pem")
   }
 };
 
