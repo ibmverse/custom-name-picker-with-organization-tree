@@ -1,6 +1,6 @@
 # custom-name-picker-with-organization-tree
 
-This is a sample of custom name picker with organization tree for VoC(Verse on Cloud) and VoP(Verse on-Premise) 1.0.2.
+This is a sample of custom name picker with organization tree for Verse on Cloud(VoC), and Verse on-Premise(VoP) version 1.0.2 and beyond.
 
 ## Demo
 ![Demo](./demo.gif)
