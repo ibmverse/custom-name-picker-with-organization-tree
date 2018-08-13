@@ -1,9 +1,18 @@
 # custom-name-picker-with-organization-tree
 
-This is a sample of custom name picker with organization tree for VoC(Verse on Cloud). For VoP user, please use the sample in [branch vop-1.0.2](/tree/vop-1.0.2).
+This is a sample of custom name picker with organization tree.
 
-## Demo
-![Demo](./demo.gif)
+There are two methods to add recipient(s) from the name picker.
+1. Add a single recipient to whichever of *To*, *Cc* or *Bcc* input fields is currently selected.
+    It is introduced in Verse on-Premises 1.0.2 and is available in Verse on-Cloud as well.
+    The [vop1.0.2 branch](../../tree/vop1.0.2) illustrates how to create this kind of name picker.
+    ![Demo](./OneRecipientDemo.gif)
+
+1. Add recipients to *To*, *Cc* and *Bcc* input fields all together in one action.
+    It is introduced in Verse on-Premises 1.0.4 and is available in Verse on-Cloud as well. 
+    **This repository illustrates how to create this kind of name picker.**
+    ![Demo](./MultipleRecipientsDemo.gif)
+
 
 ## How to run this sample
 
